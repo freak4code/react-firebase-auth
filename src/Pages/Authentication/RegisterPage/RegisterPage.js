@@ -12,7 +12,6 @@ const RegisterPage = () => {
     setError,
     signUpUsingEmailAndPassword,
     signInUsingGoogle,
-    isLoading,
     setIsLoading,
   } = useAuth();
 
