@@ -1,12 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import "./LoginPage.css";
 
 const LoginPage = () => {
-  const { user, signInUsingEmailAndPassword, signInUsingGoogle, isLoading } = useAuth();
+  const {
+    user,
+    setUser,
+    error,
+    setError,
+    signInUsingEmailAndPassword,
+    signInUsingGoogle,
+    isLoading,
+    setIsLoading,
+  } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const location = useLocation();
+  const history = useHistory();
+  const redirectUri = location.state?.from || "/home";
+  console.log(redirectUri);
 
   const handleEmail = (e) => {
     console.log(e.target.value);
@@ -18,64 +32,92 @@ const LoginPage = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = () => {
-    signInUsingEmailAndPassword(email, password);
+  const handleEmailAndPasswordLogin = (e) => {
+    e.preventDefault();
+    signInUsingEmailAndPassword(email, password)
+      .then((userCredential) => {
+        setUser(userCredential.user);
+        console.log(user);
+        setError(null);
+        history.push(redirectUri);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
+  const handleGoogleSign = (e) => {
+    signInUsingGoogle()
+      .then((result) => {
+        setUser(result.user);
+        console.log(user);
+        setError(null);
+        history.push(redirectUri);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
-    <div className="container">
-      <div className="form">
-        <div className="header">
-          <h4 className="text-primary text-center">
-            <i className="fa fa-user-circle" style={{ fontSize: "110px" }}></i>
-          </h4>
-        </div>
-        <div>
-          <form onSubmit={handleLogin}>
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text">
-                  <span style={{ fontSize: "28px", color: "Dodgerblue" }}>
-                    <i className="fa fa-at"></i>
-                  </span>
+    <div className="form">
+      <div className="header">
+        <h4 className="text-primary text-center">
+          <i className="fa fa-user-circle" style={{ fontSize: "110px" }}></i>
+        </h4>
+      </div>
+      <div>
+        <form onSubmit={handleEmailAndPasswordLogin}>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text">
+                <span style={{ fontSize: "28px", color: "Dodgerblue" }}>
+                  <i className="fa fa-at"></i>
                 </span>
-              </div>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Email"
-                onBlur={handleEmail}
-              />
+              </span>
             </div>
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text">
-                  <span style={{ fontSize: "28px", color: "Dodgerblue" }}>
-                    <i claclassNamess="fa fa-lock"></i>
-                  </span>
-                </span>
-              </div>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Password"
-                onBlur={handlePassword}
-              />
-            </div>
-
-            <button type="submit" className="btn btn-secondary btn-block">
-              Login
-            </button>
-
-            <div>
-              <Link to="/register">
-                <p>Don't have an account? Register Now !</p>
-              </Link>
-            </div>
-          </form>
-          <div className="social">
-            <i className="fab fa-google" onClick={signInUsingGoogle}></i>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Email"
+              onChange={handleEmail}
+            />
           </div>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text">
+                <span style={{ fontSize: "28px", color: "Dodgerblue" }}>
+                  <i className="fa fa-lock"></i>
+                </span>
+              </span>
+            </div>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Password"
+              onChange={handlePassword}
+            />
+          </div>
+
+          <button type="submit" className="btn btn-secondary btn-block">
+            Login
+          </button>
+          {error && (
+            <h3 className="text-center font-black service-title text-center text-danger mt-3">
+            {error}
+          </h3>
+          )}
+
+          <div>
+            <Link to="/register">
+              <p>Don't have an account? Register Now !</p>
+            </Link>
+          </div>
+        </form>
+        <div className="social">
+          <i className="fab fa-google" onClick={handleGoogleSign}></i>
         </div>
       </div>
     </div>

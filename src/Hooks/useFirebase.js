@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import { useState, useEffect } from "react";
 import initializeFirebaseAuthentication from "../Pages/Authentication/Firebase/firebase.init";
@@ -15,54 +16,33 @@ initializeFirebaseAuthentication();
 const useFirebase = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [isSetUserDisplayName, setUserDisplayName] = useState(false);
+  const [displayName, setDisplayName] = useState("");
+  const [error, setError] = useState(null);
 
   const auth = getAuth();
 
-  const signUpUsingEmailAndPassword = (email, password) => {
+  const signUpUsingEmailAndPassword = (name, email, password) => {
     setIsLoading(true);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        setUser(userCredential.user);
-        console.log(user);
-      })
-      .catch((error) => {
-        // const errorMessage = error.message;
-      })
-      .finally(() => setIsLoading(false));
+     return createUserWithEmailAndPassword(auth, email, password)
+      
   };
 
   const signInUsingEmailAndPassword = (email, password) => {
     setIsLoading(true);
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        setUser(userCredential.user);
-        console.log(user);
-      })
-      .catch((error) => {
-        // const errorMessage = error.message;
-      })
-      .finally(() => setIsLoading(false));
+    return signInWithEmailAndPassword(auth, email, password);
   };
   const signInUsingGoogle = () => {
     setIsLoading(true);
     const googleProvider = new GoogleAuthProvider();
-
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        setUser(result.user);
-        console.log(user);
-      })
-      .catch((error) => {
-        // const errorMessage = error.message;
-      })
-      .finally(() => setIsLoading(false));
+    return signInWithPopup(auth, googleProvider);
   };
 
   // observe user state change
   useEffect(() => {
     const unsubscribed = onAuthStateChanged(auth, (user) => {
+      setError(null);
       if (user) {
+        console.log("onAuthStateChanged -> ", user.displayName);
         setUser(user);
       } else {
         setUser({});
@@ -70,20 +50,39 @@ const useFirebase = () => {
       setIsLoading(false);
     });
     return () => unsubscribed;
-  }, [auth]);
+  }, [auth, displayName]);
 
   const logOut = () => {
+    setError(null);
     setIsLoading(true);
     signOut(auth)
       .then(() => {})
       .finally(() => setIsLoading(false));
   };
 
+  const updateDisplayUserName = (name) => {
+    console.log("updateDisplayUserName -> ", name);
+    setDisplayName(name);
+    updateProfile(auth.currentUser, { displayName: name })
+      .then((result) => {
+        console.log(result.user.displayName);
+        setUser(result.user);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {});
+  };
+
   return {
     user,
+    setUser,
+    updateDisplayUserName,
+    displayName,
+    error,
+    setError,
     isLoading,
-    isSetUserDisplayName,
-    setUserDisplayName,
+    setIsLoading,
     signUpUsingEmailAndPassword,
     signInUsingEmailAndPassword,
     signInUsingGoogle,
