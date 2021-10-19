@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 import "./LoginPage.css";
 
 const LoginPage = () => {
+  const { user, signInUsingEmailAndPassword, signInUsingGoogle, isLoading } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleEmail = (e) => {
     console.log(e.target.value);
+    setEmail(e.target.value);
   };
 
   const handlePassword = (e) => {
     console.log(e.target.value);
+    setPassword(e.target.value);
   };
 
-  const handleLogin = () => {};
+  const handleLogin = () => {
+    signInUsingEmailAndPassword(email, password);
+  };
 
   return (
     <div className="container">
@@ -22,12 +31,12 @@ const LoginPage = () => {
           </h4>
         </div>
         <div>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
                 <span className="input-group-text">
                   <span style={{ fontSize: "28px", color: "Dodgerblue" }}>
-                    <i class="fa fa-at"></i>
+                    <i className="fa fa-at"></i>
                   </span>
                 </span>
               </div>
@@ -42,7 +51,7 @@ const LoginPage = () => {
               <div className="input-group-prepend">
                 <span className="input-group-text">
                   <span style={{ fontSize: "28px", color: "Dodgerblue" }}>
-                    <i class="fa fa-lock"></i>
+                    <i claclassNamess="fa fa-lock"></i>
                   </span>
                 </span>
               </div>
@@ -54,7 +63,7 @@ const LoginPage = () => {
               />
             </div>
 
-            <button type="button" className="btn btn-secondary btn-block">
+            <button type="submit" className="btn btn-secondary btn-block">
               Login
             </button>
 
@@ -65,7 +74,7 @@ const LoginPage = () => {
             </div>
           </form>
           <div className="social">
-            <i className="fab fa-google"></i>
+            <i className="fab fa-google" onClick={signInUsingGoogle}></i>
           </div>
         </div>
       </div>
