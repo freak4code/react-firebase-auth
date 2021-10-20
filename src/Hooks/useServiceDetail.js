@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useServiceDetail = (id) => {
-  const [service, setService] = useState([]);
+  const [service, setService] = useState({title: "loading"});
   useEffect(() => {
     fetch("https://api.jsonbin.io/b/616f54f39548541c29c5995c", {
       headers: {

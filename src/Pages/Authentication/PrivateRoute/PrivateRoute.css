@@ -1,0 +1,10 @@
+.spinner-arena {
+  margin: 20px;
+  height: 300px;
+}
+
+.spinnner-position {
+  position: relative;
+  left: 50%;
+  top: 50%;
+}

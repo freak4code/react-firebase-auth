@@ -5,7 +5,6 @@ import "./Subscribe.css";
 
 const Subscribe = () => {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
@@ -33,7 +32,7 @@ const Subscribe = () => {
           <Modal.Title>Thanks</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          We will only give you about our inportant updates.
+          We will only give you about our important updates.
         </Modal.Body>
         <Modal.Footer>
           <Link to="/register">

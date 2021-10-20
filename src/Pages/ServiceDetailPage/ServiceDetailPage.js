@@ -1,4 +1,5 @@
 import React from "react";
+import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import useService from "../../Hooks/useService";
@@ -12,7 +13,13 @@ const ServiceDetailPage = () => {
 
   return (
     <div>
-      {title != null ? (
+      {title == "loading" ? (
+        <div className="spinner-arena">
+          <div className="spinnner-position">
+            <Spinner animation="grow" variant="waring" />
+          </div>
+        </div>
+      ) : title != null ? (
         <div>
           <div className="service-detail-container">
             <p className="col-12 d-flex justify-content-center align-items-center">
