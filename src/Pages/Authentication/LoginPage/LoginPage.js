@@ -106,8 +106,8 @@ const LoginPage = () => {
           </button>
           {error && (
             <h3 className="text-center font-black service-title text-center text-danger mt-3">
-            {error}
-          </h3>
+              {error}
+            </h3>
           )}
 
           <div>

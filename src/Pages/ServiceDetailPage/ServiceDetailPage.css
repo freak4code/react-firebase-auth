@@ -1,15 +1,27 @@
-.container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: center;
-    align-items: center;
+.service-detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  grid-template-rows: auto;
+}
+.no-service {
+  height: 300px;
+  display: grid;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.service-image {
+  width: 350px;
+  height: 300px;
 }
 
 @media only screen and (max-width: 688px) {
-    .container {
-        display: grid;
-        grid-template-columns: 1fr;
-        justify-content: center;
-        align-items: center;
-    }
+  .service-detail-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+  }
 }

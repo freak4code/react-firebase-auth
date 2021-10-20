@@ -23,8 +23,7 @@ const useFirebase = () => {
 
   const signUpUsingEmailAndPassword = (name, email, password) => {
     setIsLoading(true);
-     return createUserWithEmailAndPassword(auth, email, password)
-      
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signInUsingEmailAndPassword = (email, password) => {
@@ -44,6 +43,9 @@ const useFirebase = () => {
       if (user) {
         console.log("onAuthStateChanged -> ", user.displayName);
         setUser(user);
+        if (user.displayName != null) {
+          setDisplayName(user.displayName);
+        }
       } else {
         setUser({});
       }
@@ -77,6 +79,7 @@ const useFirebase = () => {
   return {
     user,
     setUser,
+    setDisplayName,
     updateDisplayUserName,
     displayName,
     error,
