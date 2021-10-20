@@ -4,6 +4,7 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 
 const RegisterPage = () => {
+  // using auth context
   const {
     user,
     setUser,
@@ -22,10 +23,6 @@ const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const handleDisplayName = (e) => {
     console.log(e.target.value);
@@ -51,6 +48,7 @@ const RegisterPage = () => {
         setUser(userCredential.user);
         console.log(user);
         updateDisplayUserName(name);
+        // redirect after sign up
         history.push(redirectUri);
       })
       .catch((error) => {
@@ -66,6 +64,7 @@ const RegisterPage = () => {
         setUser(result.user);
         console.log(user);
         setError(null);
+        // redirect after sign up
         history.push(redirectUri);
       })
       .catch((error) => {

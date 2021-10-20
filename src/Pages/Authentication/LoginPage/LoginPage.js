@@ -4,6 +4,7 @@ import useAuth from "../../../Hooks/useAuth";
 import "./LoginPage.css";
 
 const LoginPage = () => {
+  // using auth context
   const {
     user,
     setUser,
@@ -11,7 +12,6 @@ const LoginPage = () => {
     setError,
     signInUsingEmailAndPassword,
     signInUsingGoogle,
-    isLoading,
     setIsLoading,
   } = useAuth();
 
@@ -20,7 +20,6 @@ const LoginPage = () => {
   const location = useLocation();
   const history = useHistory();
   const redirectUri = location.state?.from || "/home";
-  console.log(redirectUri);
 
   const handleEmail = (e) => {
     console.log(e.target.value);
@@ -39,6 +38,7 @@ const LoginPage = () => {
         setUser(userCredential.user);
         console.log(user);
         setError(null);
+        // redirect to after login
         history.push(redirectUri);
       })
       .catch((error) => {
@@ -53,6 +53,7 @@ const LoginPage = () => {
         setUser(result.user);
         console.log(user);
         setError(null);
+        // redirect to after login
         history.push(redirectUri);
       })
       .catch((error) => {
@@ -61,6 +62,7 @@ const LoginPage = () => {
       .finally(() => setIsLoading(false));
   };
 
+  // render html
   return (
     <div className="form">
       <div className="header">

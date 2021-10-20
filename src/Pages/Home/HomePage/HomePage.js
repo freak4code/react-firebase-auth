@@ -6,7 +6,9 @@ import HomeInfo from "../HomeInfo/HomeInfo";
 import Subscribe from "../Subscribe/Subscribe";
 
 const HomePage = () => {
-    const [services, setServices] = useService();
+  const [services, setServices] = useService();
+
+  // render html
   return (
     <div>
       <Banner></Banner>

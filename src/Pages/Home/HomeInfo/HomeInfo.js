@@ -2,6 +2,8 @@ import React from "react";
 import "./HomeInfo.css";
 
 const HomeInfo = () => {
+
+  // render html
   return (
     <div className="home-info">
       <h1 className="text-warning text-center text-position">Nowhere Health</h1>

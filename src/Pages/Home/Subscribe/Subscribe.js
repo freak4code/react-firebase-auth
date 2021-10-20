@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import "./Subscribe.css";
 
 const Subscribe = () => {
+  // for showing modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // render html
   return (
     <div>
       <Form className="subscribe">
@@ -41,12 +44,10 @@ const Subscribe = () => {
             </Button>
           </Link>
           <Link to="/">
-          <Button variant="primary" onClick={handleClose}>
-            Close
-          </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Close
+            </Button>
           </Link>
-
-         
         </Modal.Footer>
       </Modal>
     </div>

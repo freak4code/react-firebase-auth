@@ -5,7 +5,9 @@ import useAuth from "../../Hooks/useAuth";
 import "./DirectConsultecyPage.css";
 
 const DirectConsultecyPage = () => {
+  // using auth c
   const { user } = useAuth();
+  // for showing modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -43,6 +45,9 @@ const DirectConsultecyPage = () => {
           Submit
         </Button>
       </Form>
+
+      {/* Modal */}
+
       <Modal backdrop="static" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Submitted</Modal.Title>

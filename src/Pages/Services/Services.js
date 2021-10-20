@@ -5,6 +5,8 @@ import "./Services.css";
 
 const Services = () => {
   const [services, setServices] = useService();
+
+  // render html
   return (
     <div>
       <h3 className="text-center font-black service-title text-success mt-3">

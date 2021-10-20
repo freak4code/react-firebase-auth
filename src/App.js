@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import LoginPage from "./Pages/Authentication/LoginPage/LoginPage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -16,6 +15,7 @@ import DirectConsultecyPage from "./Pages/DirectConsultecyPage/DirectConsultecyP
 import NotFound from "./Pages/NotFound/NotFound";
 function App() {
   return (
+    // Providing auth context
     <AuthProvider>
       <Router>
         <Header></Header>
@@ -48,7 +48,6 @@ function App() {
           <Route exact path="/register">
             <RegisterPage></RegisterPage>
           </Route>
-
           <Route exact path="*">
             <NotFound></NotFound>
           </Route>

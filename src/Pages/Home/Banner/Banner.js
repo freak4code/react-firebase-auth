@@ -2,6 +2,8 @@ import React from "react";
 import { Carousel } from "react-bootstrap";
 
 const Banner = () => {
+
+  // render html
   return (
     <Carousel style={{ margin: "20px" }}>
       <Carousel.Item>

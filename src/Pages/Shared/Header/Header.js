@@ -1,13 +1,14 @@
 import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
-import { NavHashLink } from "react-router-hash-link";
+import { Nav, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import "./Header.css";
 
 const Header = () => {
+  // use auth context
   const { user, displayName, logOut } = useAuth();
 
+  // render html
   return (
     <>
       <Navbar
@@ -38,8 +39,10 @@ const Header = () => {
             </Nav.Link>
           </Nav>
 
+          {/* Set user name if login */}
           {user.email && <Navbar.Text>Signed in as: {displayName}</Navbar.Text>}
           <Navbar.Text>
+            {/* Show log in or log out button */}
             {user.email ? (
               <p className="loggedButton btn btn-danger" onClick={logOut}>
                 Log Out

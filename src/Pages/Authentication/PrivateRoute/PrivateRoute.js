@@ -5,7 +5,10 @@ import useAuth from "../../../Hooks/useAuth";
 import "./PrivateRoute.css";
 
 const PrivateRoute = ({ children, ...rest }) => {
+  // using auth context
   const { user, isLoading } = useAuth();
+
+  // showing spinner when checking user login status
   if (isLoading) {
     return (
       <div className="spinner-arena">

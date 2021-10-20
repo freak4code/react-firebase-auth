@@ -2,24 +2,24 @@ import React from "react";
 import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import useService from "../../Hooks/useService";
 import useServiceDetail from "../../Hooks/useServiceDetail";
 import "./ServiceDetailPage.css";
 
 const ServiceDetailPage = () => {
   const { id } = useParams();
-  const [services, setServices] = useService();
   const { title, subtitle, image, des } = useServiceDetail(parseInt(id));
 
   return (
     <div>
-      {title == "loading" ? (
+      {/* Showing spinner while getting data */}
+      {title === "loading" ? (
         <div className="spinner-arena">
           <div className="spinnner-position">
             <Spinner animation="grow" variant="waring" />
           </div>
         </div>
-      ) : title != null ? (
+      ) : // data found
+      title != null ? (
         <div>
           <div className="service-detail-container">
             <p className="col-12 d-flex justify-content-center align-items-center">
@@ -37,6 +37,7 @@ const ServiceDetailPage = () => {
           <p className="text-secondary font-black text-center m-3">{des}</p>
         </div>
       ) : (
+        // no data found
         <div className="no-service">
           <h1 className="text-center font-black text-danger mt-3">
             No service available for this id
