@@ -2,7 +2,7 @@ import React from "react";
 import "./About.css";
 
 const About = () => {
-  // Render Html
+  // render Html
   return (
     <div className="about-container">
       <h3 className="text-3xl text-center font-black course-title text-success text-color">

@@ -11,11 +11,13 @@ import {
 import { useState, useEffect } from "react";
 import initializeFirebaseAuthentication from "../Pages/Authentication/Firebase/firebase.init";
 
+//  initialize firebase
 initializeFirebaseAuthentication();
 
 const useFirebase = () => {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  // update display name when sign up using email and password
   const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState(null);
 
@@ -62,6 +64,7 @@ const useFirebase = () => {
       .finally(() => setIsLoading(false));
   };
 
+  // update display name when sign up using email and password
   const updateDisplayUserName = (name) => {
     console.log("updateDisplayUserName -> ", name);
     setDisplayName(name);
@@ -79,7 +82,6 @@ const useFirebase = () => {
   return {
     user,
     setUser,
-    setDisplayName,
     updateDisplayUserName,
     displayName,
     error,

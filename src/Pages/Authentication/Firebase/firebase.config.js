@@ -1,11 +1,11 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyBU6G6r8-mwC8iVZXCTGM75g2CwcA5Xs2M",
-  authDomain: "snnafi-nodejs-apps.firebaseapp.com",
-  projectId: "snnafi-nodejs-apps",
-  storageBucket: "snnafi-nodejs-apps.appspot.com",
-  messagingSenderId: "818956249792",
-  appId: "1:818956249792:web:0e2d1540ee0a90f6a09b25",
-  measurementId: "G-XX6H4P4MD4",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,  
 };
 
 export default firebaseConfig;
