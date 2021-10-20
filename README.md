@@ -15,6 +15,5 @@ _A react frontend single page web application with dynamic ar private routing. U
 - Custom Hooks
 - Redirect after login
 - User React Enviroment Variables
-  <br>
-  <br>
-  **By: Shahriar Nasim Nafi**
+
+**By: Shahriar Nasim Nafi**
